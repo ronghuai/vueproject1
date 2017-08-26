@@ -10,13 +10,13 @@ import vueRouter from 'vue-router';
 Vue.use(vueRouter);
 
 // 3.0.2 导入路由规则对应的组件对象
-import login from './components/account/login.vue';
+import home from './components/Home.vue';
 import register from './components/account/register.vue';
 
 // 3.0.2 定义路由规则
 var router1 = new vueRouter({
 	routes:[
-		{path:'/login',component:login}, 
+		{path:'/home',component:home}, 
 		{path:'/register',component:register}
 	]
 	});
