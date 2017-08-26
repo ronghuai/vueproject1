@@ -12,13 +12,34 @@
 </template>
 
 <script>
+import { Toast } from 'mint-ui';
 export default {
   data(){
       return{
-  list:[
-  {"url":"http://www.itcast.cn/subject/phoneweb/index.html","img":"http://ofv795nmp.bkt.clouddn.com/vuelogobanner1.jpg"},{"url":"http://www.itcast.cn/subject/phoneweb/index.html","img":"http://ofv795nmp.bkt.clouddn.com/vuelogobanner2-1.jpg"}
-  ]
+  list:[]
 }
+},
+created(){
+    //当页面中的data和methods对象都创建完毕以后，就会自动调用created
+this.getimgs();
+},
+methods:{
+    getimgs(){
+        //实现轮播组件中的数据请求
+        //1.0确定url
+        var url ="http://www.lovegf.cn:8899/api/getlunbo";
+        //2.0调用$http.get()
+        this.$http.get(url).then(function(response){
+           var data = response.body;
+           //错误处理
+           if(data.status !=0){
+               Toast(data.message);
+               return;
+           }
+           //如果服务器返回的数据正常，则赋值给list
+           this.list = data.message; 
+        })
+    }
 }
 }
 </script>
@@ -28,7 +49,7 @@ export default {
         height: 300px;
     }
    .mint-swipe-item img{
-       width: 100%;
+       width:100%;
    }
     .mint-swipe-item{
         background-color: red;
